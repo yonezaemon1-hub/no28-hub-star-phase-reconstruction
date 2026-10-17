@@ -26,6 +26,8 @@ The immutable original audit (`No28_FINAL_AUDIT_DECISION_20261016.zip`) said **p
 - `SHA256SUMS` — hashes of all above files and verification code (excluding manifest itself).
 - `verify_sha256.py` — no-dependency manifest checker for Python 3.12 on Windows 10 or other OS.
 
+**PDF integrity note (2026-10-18):** The GitHub PDF has a different byte hash from the original PDF contained in the 2026-10-17 archival preparation ZIP, but the four extracted-text pages and all four rasterized pages compare exactly at 1.5× rendering. The repository `SHA256SUMS` records the **GitHub-published PDF bytes**, not the original preparation-ZIP PDF bytes; the TeX source and original closure-audit ZIP remain byte-identical to their archived copies. This distinction affects file provenance, not the stated research status.
+
 ## Reproducibility
 
 Run `python verify_sha256.py` within this directory. To run the algebra checker, unpack the evidence ZIP and run its `independent_equation_check.py` (requires SymPy). Previous numerical results in nested ZIPs may need SciPy; the check of original evidence integrity does not.
