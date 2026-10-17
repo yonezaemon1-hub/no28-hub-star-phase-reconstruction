@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{geometry,microtype,booktabs,array}
+\usepackage{xcolor,hyperref}
+\usepackage{fancyhdr}
+\geometry{margin=25mm,headheight=15pt}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue!55!black,citecolor=blue!55!black,pdfauthor={Ryutaro Yonezu},pdftitle={No.28: Restricted Hub-Star Phase Reconstruction --- Archival Research Record}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Yonezu Research Lab \quad No.28}
+\fancyhead[R]{\footnotesize Archival research record}
+\fancyfoot[C]{\thepage}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+\newcommand{\K}{\mathsf{K}}
+\newcommand{\code}{\mathsf{Q}}
+\newcommand{\dd}{\mathrm{d}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Restricted Hub-Star Phase Reconstruction:}\par\vspace{2mm}
+{\Large\bfseries A Conditional Research Record on Ternary Resets and Noise Scaling}\par\vspace{5mm}
+{\large Ryutaro Yonezu}\par
+Yonezu Research Lab\par
+\href{mailto:yonezaemon1+research@gmail.com}{yonezaemon1+research@gmail.com}\par\vspace{2mm}
+17 October 2026 \quad --- \quad No.28 (archival version 1.0)\par
+\end{center}
+\vspace{1mm}
+\begin{center}
+\fbox{\parbox{0.93\linewidth}{\small\textbf{Status and claim boundary.} This is an \textbf{unrefereed, inconclusive research record}, not an independently validated novel theorem, journal publication, or claim of scientific priority. Two narrowly defined mathematical results are classified \textbf{CONDITIONAL PASS} by the project's internal audit; a raw-phase sample-complexity upper estimate remains a \textbf{proof sketch}; novelty is \textbf{INCONCLUSIVE}. No external human or second-model independent review of the final bundle was performed.}}
+\end{center}
+\begin{abstract}
+A restricted binary hub-star Kuramoto network is used to investigate reconstruction of one unknown leaf-to-leaf edge from the phase of a single hub. Under exact graph and reset-model assumptions, a three-level initialization produces a second-order hub jet that encodes one target edge together with other unknown edges as an integer of the form $a+2d$; parity then identifies the target edge. For fixed-horizon, independently noisy raw hub-phase observations, a normalized two-hypothesis argument yields a model-specific $\Omega(\sigma^2 N^4)$ reading lower bound. We archive a conservative asymptotic upper-bound outline, prior numerical evidence, and reproducible symbolic checks, explicitly separating checked identities from uncompleted analytic proof. These results combine established ideas from oscillator-network inference, partial observability, and polynomial interpolation. No originality, broad physical applicability, or experimental validation is asserted.
+\end{abstract}
+\section{Restricted dynamical and observation model}
+Let $N=m+1$ vertices comprise one hub $0$ and $m$ leaves $1,\ldots,m$. The hub is connected to every leaf. The other edges are unknown binary variables. The interaction is the symmetric Kuramoto ODE
+\begin{equation}
+\dot\theta_i(t)=\omega_i + k\sum_{j} a_{ij}\sin\bigl(\theta_j(t)-\theta_i(t)\bigr),\qquad a_{ij}=a_{ji}\in\{0,1\},\quad k=1/N.
+\label{eq:kuramoto}
+\end{equation}
+The intended model for the rate analysis sets all intrinsic frequencies to zero, knows $k$ exactly, and permits precisely specified initial phases (resets). The same unknown graph is used for repetitions. Only an \emph{unwrapped} hub phase $h(t)=\theta_0(t)$ is read. Raw-phase readings are corrupted by independent Gaussian noise of variance $\sigma^2$; there is no process noise. The observation horizon $T>0$ is fixed as $N$ grows. Claims do not automatically extend to heterogeneous weights, unknown frequencies, arbitrary reset jitter, or wrapped/noisy phase estimates.
+\section{Conditionally checked ternary-reset identity}
+Select leaves $1$ and $2$. Prepare
+\begin{equation}
+\theta_1(0)=\pi,\quad \theta_2(0)=\phi=\arccos(-1/3),\quad \theta_j(0)=0\quad(j\ge3),\quad h(0)=0.
+\end{equation}
+Put $a=a_{12}\in\{0,1\}$ and $d=\sum_{j=3}^{m}a_{2j}\in\mathbb{Z}_{\ge0}$, and write $s=\sin\phi$. The internally checked algebra gives
+\begin{equation}
+ h''(0)=k^2s\left(\frac{11}{3}-m+\frac{2}{3}a+\frac{4}{3}d\right),
+ \qquad
+ \code:=\frac{3h''(0)}{2k^2s}+\frac{3m-11}{2}=a+2d.
+ \label{eq:code}
+\end{equation}
+Therefore, for an exact second-order jet under this model, $a=\code\pmod2$. This is a \textbf{single prepared dynamical experiment with access to a derivative jet}, \emph{not} a claim that a single noisy scalar phase reading suffices. The different leaf phase values are $0,\phi,\pi$ (three reset levels).
+
+The second-jet lattice spacing for distinct integer codes is $A=4\sqrt{2}\,k^2/9$. Exact nearest-lattice identification requires the derivative-estimation error to be less than $A/2$ in absolute value. It does not follow that such precision is attainable with a fixed number of noisy raw-phase samples.
+
+A separate restricted obstruction for single two-level resets is recorded in the evidence through phase-preserving leaf symmetries. It must \emph{not} be conflated with the still-open general two-binary-probe question.
+\section{Conditional noise barrier under raw-phase readings}
+For two graphs which differ only in a designated leaf edge (all other model parameters and controls shared), the internally derived Gronwall comparison for $0\le t\le T$ yields
+\begin{equation}
+|h_1(t)-h_0(t)|\le B := k^2(e^T-1)^2.
+\label{eq:bound}
+\end{equation}
+If each raw-hub reading has independent $\mathcal{N}(0,\sigma^2)$ noise, then for $M$ readings the conditional Kullback--Leibler divergence is at most $MB^2/(2\sigma^2)$ under shared control histories, including the specified adaptive protocols. A two-point testing argument implies that achieving error at most $1/4$ under \emph{each} hypothesis requires
+\begin{equation}
+M\;\ge\;\frac{\sigma^2}{B^2}
+=\frac{\sigma^2 N^4}{(e^T-1)^4}
+=\Omega(\sigma^2 N^4)\quad(T,\sigma>0\ \mathrm{fixed}).
+\label{eq:lower}
+\end{equation}
+This is a lower bound for the deliberately normalized comparison, not an unconditional lower bound for every phase-sensing architecture. The \emph{direct second-jet observation model} is different: in that separate model, a Gaussian tail argument gives $R\ge(81/4)\sigma^2N^4\log(2/\delta)$ for the stated parity decoder. These two models and their respective constants must not be interchanged.
+\section{Upper-bound proof outline: \textbf{not a certified theorem}}
+The archived analytical outline combines a complex-time neighborhood of the ODE, Chebyshev--Lobatto sampling and derivative interpolation with Gaussian averaging. For fixed $T$, fixed $\sigma>0$, fixed confidence parameter $\delta\in(0,1)$, and large enough $N$, it proposes an existence estimate of the form
+\begin{equation}
+ M=O\!\left(\sigma^2 N^4(\log N)^9(\log\log N)^2\log\!\frac{\log N}{\delta}\right),
+\label{eq:upper}
+\end{equation}
+with separately handled additive terms in a very-low-noise regime. \textbf{This is only a conditional proof sketch.} The uniform analytic-time estimates and complete interpolation constants have not been independently established or machine certified as a complete proof. Equation~\eqref{eq:upper} is included to document the unfinished approach, \emph{not} as a proven upper theorem, numerical performance certificate, or practical method.
+\section{Archived computational evidence and limits}
+The October 16 internal closure bundle includes frozen exact verifiers, perturbation checks, raw-phase numerical examples, a separate symbolic equation checker, and SHA-256 manifests. Its audit reported exact checks over 33,864 graphs with $m=3,\ldots,6$ and sampling of 35,000 graphs with $m\in\{7,8,12,20\}$; six perturbation-collision cases; twelve trajectory checks; six stdlib RK4 graph cases; and a SciPy raw-phase demonstration for $N\in\{8,16,32,64\}$. These are \emph{archived internal experiments}, not independent external validation.
+
+For the raw-phase illustration the archived reproducibility report lists, for each $N$ and a 3,200-trial budget, success counts $3130,1698,1637,1578$ at a fixed-eight setting and $3134,3136,3134,3132$ under an $N^4$-scaled setting. These numbers illustrate sensitivity to the observation budget only in the simulator and should not be extrapolated to hardware or to other dynamics.
+
+On preparation for this archival edition, the original closure-bundle SHA-256 manifest was verified and \texttt{independent\_equation\_check.py} was rerun, returning PASS on the stated selected identities. This is an additional reproduction of project materials, \textbf{not} third-party peer review, and does not fill the proof gaps above.
+\section{Prior methods and novelty assessment}
+Phase-reset inference, inverse reconstruction from aggregated/mean-field measurements, noisy partial observation, and analytic Chebyshev differentiation are established research directions \cite{levnajic2011,pikovsky2018,kiran2026,berry2025,reddy2005}. In particular, the published 2026 work of Kiran and Pereira concerns network recovery from aggregated measurements and localized perturbations \cite{kiran2026}. The present reset algebra and restricted $N^4$ comparison were not located verbatim in the \emph{bounded} review recorded in the audit, but this is not evidence of priority or novelty. An exact reduction to earlier constructions, an unrecognized known corollary, or additional prior literature may exist. The archival novelty assessment is therefore \textbf{INCONCLUSIVE} and leans toward a specialization or combination of existing methods.
+\section{Final research disposition and reproducibility}
+\textbf{CONDITIONAL PASS}: restricted algebraic code in \eqref{eq:code}; normalized fixed-time noise lower bound in \eqref{eq:lower}. \textbf{PROOF SKETCH / NOT CERTIFIED}: raw-phase upper outline in \eqref{eq:upper}. \textbf{INCONCLUSIVE}: novelty and full scholarly priority. \textbf{NOT PERFORMED}: independent external mathematical audit, real hardware validation, complete noise-robust inference under reset uncertainty, and broad-model generalization. There is no claim of all-$m$ generic two-binary-probe sufficiency, minimax-optimal logarithmic factors, general weighted interactions, or a new calculation principle.
+
+\textbf{Change of dissemination status on 17 October 2026.} The October 16 audit itself deferred public posting pending owner authorization or external review. The author subsequently authorized \emph{archival publication with explicit limitations}. This authorization changes only dissemination, not the mathematics, audit conclusions, or novelty status. The signed-off source closure document is preserved unchanged in the accompanying evidence archive.
+
+All rights reserved. This archival release grants no additional reuse license. For research inquiries: \href{mailto:yonezaemon1+research@gmail.com}{yonezaemon1+research@gmail.com}. The associated frozen evidence ZIP and its internal manifests are the primary reproducibility materials. No journal acceptance, scholarly peer review, DOI, or repository URL is implied by this manuscript until independently confirmed.
+\begin{thebibliography}{99}
+\bibitem{levnajic2011} Z. Levnaji\'{c} and A. Pikovsky, \`\`Network Reconstruction from Random Phase Resetting,'' \emph{Phys. Rev. Lett.} 107 (2011), 034101. \url{https://doi.org/10.1103/PhysRevLett.107.034101}.
+\bibitem{pikovsky2018} A. Pikovsky, \`\`Reconstruction of a random phase dynamics network from observations,'' \emph{Physics Letters A} 382 (2018), 147--152. \url{https://doi.org/10.1016/j.physleta.2017.11.012}.
+\bibitem{kiran2026} N. Kiran and T. Pereira, \`\`Unique Reconstruction from Mean-Field Measurements,'' \emph{SIAM Journal on Applied Dynamical Systems} 25 (2026), 629--653. \url{https://doi.org/10.1137/25M1764815}.
+\bibitem{berry2025} T. Berry and T. Sauer, \`\`Reconstruction of Network Dynamics from Partial Observations,'' \emph{SIAM Journal on Applied Dynamical Systems} 24 (2025), 633--654. \url{https://doi.org/10.1137/24M1655780}.
+\bibitem{reddy2005} S. C. Reddy and J. A. C. Weideman, \`\`The Accuracy of the Chebyshev Differencing Method for Analytic Functions,'' \emph{SIAM Journal on Numerical Analysis} 42 (2005), 2176--2187. \url{https://doi.org/10.1137/040603280}.
+\end{thebibliography}
+\end{document}
