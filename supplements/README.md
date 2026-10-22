@@ -9,3 +9,14 @@ This technical supplement reclassifies the former No.32 exploratory candidates v
 **Evidence:** The full locally prepared audit bundle is `No28_Technical_Appendix_A_v0.1_Audit_Archive.zip` (SHA256 `1d2c3c928ab3e0aa79de17d85732da0f7f5aa5e41f4243ffbfe05ecd068c1fc7`), containing all four exploratory audit archives. **That binary archive has not been uploaded to this GitHub directory.** It should not be represented as a GitHub-hosted file until independently verified. The complete original No.28 GitHub files remain unchanged.
 
 **Copyright:** Ryutaro Yonezu / Yonezu Research Lab. All rights reserved.
+
+## Archived exploratory source notes
+
+The four underlying research notes are published here as text for traceability (these are **not** standalone numbered papers):
+
+- [v0.1 — constrained phase-margin optimization](source-notes/No32_Candidate_v0.1_Research_Note.md)
+- [v0.2 — nuisance-edge suppression](source-notes/No32_Candidate_v0.2_Research_Note.md)
+- [v0.3 — deterministic jitter and collisions](source-notes/No32_Candidate_v0.3_Jitter_Research_Note.md)
+- [v0.4 — antipodal paired reset](source-notes/No32_Candidate_v0.4_Research_Note.md)
+
+The numerical code, JSON results and the original audit ZIPs are preserved in the separately prepared binary archive, **not** in this GitHub supplement at present. The original published No.28 files and root SHA256 manifest are unchanged.
